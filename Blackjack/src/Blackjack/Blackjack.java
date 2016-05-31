@@ -1,10 +1,12 @@
 package Blackjack;
 import java.util.*;
 
+import javax.swing.JOptionPane;
+
 public class Blackjack {
 	private static int efectivo;	//dinero con el que el jugador apuesta
-	private static int apuesta;	//cuánto quiere apostar el jugador
-	private static int contadorAce;	//cuántos Ace tiene el jugador en la mano
+	private static int apuesta;	//cuï¿½nto quiere apostar el jugador
+	private static int contadorAce;	//cuï¿½ntos Ace tiene el jugador en la mano
 	private static int valorMano;	//el valor de la mano del jugador
 	private static String nombre;	//nombre del jugador
 	private static Scanner scan;
@@ -15,14 +17,29 @@ public class Blackjack {
 	private static Scanner scan2;
 	
 	public static void main(String[] args){
-	    System.out.println("¡Hola! Elige un nickname:");
+		
+		/*
+	    System.out.println("ï¿½Hola! Elige un nickname:");
 	    scan2 = new Scanner(System.in);
 	    nombre = scan2.nextLine();
+	    */
+		nombre = JOptionPane.showInputDialog("Hola! Elige un NickName");
+		/*
 	    System.out.println("Buenas, "+nombre+", vamos a jugar BlackJack!");
-	    System.out.println("¿Con cuánto dinero quieres empezar?");
+	    */
+		JOptionPane.showMessageDialog(null, "Buenas, "+nombre+", vamos a jugar BlackJack!");
+		/*
+	    System.out.println("ï¿½Con cuï¿½nto dinero quieres empezar?");
 	    dinero = new Scanner(System.in);
 	    efectivo = dinero.nextInt();
+	    */
+		String dinero = JOptionPane.showInputDialog("Â¿Con cuÃ¡nto dinero quieres empezar?");
+		efectivo = Integer.parseInt(dinero);
+		/*
 	    System.out.println("Empiezas con: "+efectivo);
+	    */
+		JOptionPane.showMessageDialog(null, "Empiezas con:"+efectivo);
+		
 	    while(efectivo>0){
 	        Baraja baraja = new Baraja();	//initialize deck, dealer, hands, and set the bet.
 	        baraja.mezclar();
@@ -31,14 +48,14 @@ public class Blackjack {
 	        List<Carta> mano = new ArrayList<>();
 	        mano.add(baraja.robarCarta());
 	        mano.add(baraja.robarCarta());
-	        System.out.println("¿Cuánto te gustaría apostar?");
+	        System.out.println("ï¿½Cuï¿½nto te gustarï¿½a apostar?");
 	        apuesta=Apuesta(efectivo);
 	        System.out.println("Efectivo:"+(efectivo-apuesta));
 	        System.out.println("Dinero en la mesa:"+apuesta);
 	        System.out.println("Esta es tu mano: ");
 	        System.out.println(mano);
 	        int valorMano = calcValorMano(mano);
-	        System.out.println("El dealer está enseñando: ");
+	        System.out.println("El dealer estï¿½ enseï¿½ando: ");
 	        dealer.muestraPrimeraCarta();
 	        if(tieneBlackJack(valorMano) && dealer.tieneBlackJack())	//comprueba si el jugador y el dealer tienen blackjack.
 	        {
@@ -61,7 +78,7 @@ public class Blackjack {
 	        {
 	            if(2*apuesta<efectivo)	//comprueba si el jugador puede doblar.
 	            {
-	                System.out.println("¿Te gustaría doblar?");	//permite al jugador doblar.
+	                System.out.println("ï¿½Te gustarï¿½a doblar?");	//permite al jugador doblar.
 	                doblar = new Scanner(System.in);
 	                String doblado = doblar.nextLine();
 	                while(!esSiONo(doblado))
@@ -77,7 +94,7 @@ public class Blackjack {
 	                    System.out.println("Dinero en el tablero:"+apuesta);
 	                }
 	            }
-	            System.out.println("¿Pides o pasas?");
+	            System.out.println("ï¿½Pides o pasas?");
 	            pideOPasa = new Scanner(System.in);
 	            String pedido = pideOPasa.nextLine();
 	            while(!pideOPasa(pedido))
@@ -101,7 +118,7 @@ public class Blackjack {
 	                    fivecardtrick();
 	                    break;
 	                }
-	                System.out.println("¿Pides o pasas?");
+	                System.out.println("ï¿½Pides o pasas?");
 	                pedido = pideOPasa.nextLine();
 	            }
 	            if(pedido.equals("paso"))	//el jugador pasa
@@ -116,7 +133,7 @@ public class Blackjack {
 	                }
 	                else
 	                {
-	                    int jugador = 21-valorMano;	//comprueba quién está más cerca de 21
+	                    int jugador = 21-valorMano;	//comprueba quiï¿½n estï¿½ mï¿½s cerca de 21
 	                    int deal = 21-manoDealer;
 	                    if(jugador==deal)
 	                    {
@@ -133,7 +150,7 @@ public class Blackjack {
 	                }
 	            }
 	        }
-	    System.out.println("¿Quieres jugar otra vez?");
+	    System.out.println("ï¿½Quieres jugar otra vez?");
 	    siono = new Scanner(System.in);
 	    String respuesta = siono.nextLine();
 	    while(!esSiONo(respuesta))
@@ -149,11 +166,11 @@ public class Blackjack {
 	    System.out.println("Tu efectivo: "+efectivo);
 	    if(efectivo==0)
 	    {
-	        System.out.println("¡Te quedaste sin dinero!");
+	        System.out.println("ï¿½Te quedaste sin dinero!");
 	    }
 	    else
 	    {
-	        System.out.println("¡Disfruta de tus ganancias, "+nombre+"!");
+	        System.out.println("ï¿½Disfruta de tus ganancias, "+nombre+"!");
 	    }
 	}	//Aqui termina el Main
 	
@@ -202,8 +219,8 @@ public class Blackjack {
 	    int apuesta=scan.nextInt();
 	    while(apuesta>efectivo)
 	    {
-	        System.out.println("¡No puedes apostar más de lo que tienes!");
-	        System.out.println("¿Cuánto quieres apostar?");
+	        System.out.println("ï¿½No puedes apostar mï¿½s de lo que tienes!");
+	        System.out.println("ï¿½Cuï¿½nto quieres apostar?");
 	        apuesta=scan.nextInt();
 	    }
 	    return apuesta;
@@ -214,7 +231,7 @@ public class Blackjack {
 	 */
 	public static void Gana()
 	{
-	    System.out.println("¡Felicidades, has ganado!");
+	    System.out.println("ï¿½Felicidades, has ganado!");
 	    efectivo=efectivo+apuesta;
 	    System.out.println("Efectivo: "+efectivo);
 	}
@@ -234,13 +251,13 @@ public class Blackjack {
 	 */
 	public static void Empate()
 	{
-	    System.out.println("¡Es un empate!");
+	    System.out.println("ï¿½Es un empate!");
 	    System.out.println("Tienes tu dinero de vuelta.");
 	    System.out.println("Efectivo: "+efectivo);
 	}
 	
 	/*
-	 * Añade una carta a la mano del usuario y calcula el valor de la mano. Los Aces se toman en cuenta.
+	 * Aï¿½ade una carta a la mano del usuario y calcula el valor de la mano. Los Aces se toman en cuenta.
 	 */
 	public static void Pide(Baraja baraja, List<Carta> mano)
 	{
@@ -282,7 +299,7 @@ public class Blackjack {
 	{
 	    if(valorMano>21)
 	    {
-	        System.out.println("¡Te has pasado!");
+	        System.out.println("ï¿½Te has pasado!");
 	        return true;
 	    }
 	    return false;
