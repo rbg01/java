@@ -48,8 +48,13 @@ public class Blackjack {
 	        List<Carta> mano = new ArrayList<>();
 	        mano.add(baraja.robarCarta());
 	        mano.add(baraja.robarCarta());
+	        /*
 	        System.out.println("�Cu�nto te gustar�a apostar?");
 	        apuesta=Apuesta(efectivo);
+	        */
+	        String pasta = JOptionPane.showInputDialog("¿Cuánto quieres apostar...?");
+			apuesta = Integer.parseInt(pasta);
+
 	        System.out.println("Efectivo:"+(efectivo-apuesta));
 	        System.out.println("Dinero en la mesa:"+apuesta);
 	        System.out.println("Esta es tu mano: ");
